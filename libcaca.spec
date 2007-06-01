@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
 %define pre beta11
-%define release %mkrel 0.%pre.1
+%define release %mkrel 0.%pre.2
 %define build_slang 1
 #%ifarch x86_64
 #define build_slang 0
