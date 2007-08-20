@@ -121,8 +121,8 @@ rm -rf %{buildroot}
 %{_bindir}/caca-config
 %_bindir/*/caca-config
 %{_includedir}/*
-%{_datadir}/man/man1/caca-config.1*
-%{_datadir}/man/man3/*
+%{_mandir}/man1/caca-config.1*
+%{_mandir}/man3/*
 %_libdir/pkgconfig/*.pc
 %_libdir/lib*.so
 %_libdir/lib*a
