@@ -1,21 +1,18 @@
 %define name libcaca
 %define version 0.99
-%define pre beta11
-%define release %mkrel 0.%pre.2
+%define pre beta12
+%define release %mkrel 0.%pre.1
 %define build_slang 1
-#%ifarch x86_64
-#define build_slang 0
-#%endif
 
 %define major 0
 %define libname %mklibname caca %major
+%define develname %mklibname -d caca
 
 Name: %{name}
 Version: %{version}
 Release: %{release}
 URL: http://sam.zoy.org/projects/libcaca/
-Source: http://sam.zoy.org/projects/libcaca/%{name}-%{version}.%pre.tar.bz2
-Patch1: libcaca-0.99.beta11-a4wide.patch
+Source: http://sam.zoy.org/projects/libcaca/%{name}-%{version}.%pre.tar.gz
 License: GPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -45,15 +42,15 @@ for colour text drawing, simple primitives for line, polygon and ellipse
 drawing, as well as powerful image to text conversion routines.
 
 
-%package -n %{libname}-devel
+%package -n %develname
 Summary: Development files for libcaca
 Group: Development/C
 Provides: %{name}-devel = %{version}-%{release}
-Obsoletes: %{name}-devel
 Provides: lib%{name}-devel = %{version}-%{release}
 Requires: %libname = %version
+Obsoletes: %mklibname -d caca 0
 
-%description -n %{libname}-devel
+%description -n %develname
 libcaca is the Colour AsCii Art library. It provides high level functions
 for colour text drawing, simple primitives for line, polygon and ellipse
 drawing, as well as powerful image to text conversion routines.
@@ -83,10 +80,6 @@ such as line and ellipses drawing, triangle filling and sprite blitting.
 
 %prep
 %setup -q -n %name-%version.%pre
-%patch1 -p1 -b .a4wide
-aclocal-1.7
-automake-1.7 -a -c
-autoconf
 
 %build
 %configure2_5x \
@@ -115,7 +108,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %_libdir/lib*.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %develname
 %defattr(-,root,root)
 %doc installed-docs/pdf/* installed-docs/html NEWS NOTES TODO
 %{_bindir}/caca-config
