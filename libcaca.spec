@@ -26,7 +26,7 @@ Buildrequires: libpango-devel
 Buildrequires: libmesaglut-devel
 Buildrequires: doxygen, tetex-latex, tetex-dvips
 Buildrequires: automake1.7
-Buildrequires: ruby mono
+Buildrequires: ruby-devel mono
 
 Summary: Text mode graphics library
 %description
