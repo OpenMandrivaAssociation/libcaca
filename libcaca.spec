@@ -11,10 +11,10 @@
 Name: %{name}
 Version: %{version}
 Release: %{release}
-URL: http://sam.zoy.org/projects/libcaca/
-Source: http://sam.zoy.org/projects/libcaca/%{name}-%{version}.%pre.tar.gz
+URL: http://libcaca.zoy.org/
+Source: http://libcaca.zoy.org/files/%{name}-%{version}.%pre.tar.gz
 Patch0:	libcaca-0.99.beta13-ruby.patch
-License: GPL
+License: WTFPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
 Buildrequires: X11-devel, libncursesw-devel >= 5
