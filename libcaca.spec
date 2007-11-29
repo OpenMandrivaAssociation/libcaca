@@ -1,6 +1,6 @@
 %define name libcaca
 %define version 0.99
-%define pre beta12
+%define pre beta13
 %define release %mkrel 0.%pre.1
 %define build_slang 1
 
@@ -13,6 +13,7 @@ Version: %{version}
 Release: %{release}
 URL: http://sam.zoy.org/projects/libcaca/
 Source: http://sam.zoy.org/projects/libcaca/%{name}-%{version}.%pre.tar.gz
+Patch0:	libcaca-0.99.beta13-ruby.patch
 License: GPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -25,6 +26,7 @@ Buildrequires: libpango-devel
 Buildrequires: libmesaglut-devel
 Buildrequires: doxygen, tetex-latex, tetex-dvips
 Buildrequires: automake1.7
+Buildrequires: ruby mono
 
 Summary: Text mode graphics library
 %description
@@ -78,8 +80,23 @@ an old school plasma effect.
 cacademo is a simple application that shows the libcaca rendering features
 such as line and ellipses drawing, triangle filling and sprite blitting.
 
+%package -n caca-sharp
+Summary: C# binding for libcaca
+Group: Development/Other
+
+%description -n caca-sharp
+C# binding for libcaca
+
+%package -n ruby-caca
+Summary: Ruby binding for libcaca
+Group: Development/Ruby
+
+%description -n ruby-caca
+Ruby binding for libcaca
+
 %prep
 %setup -q -n %name-%version.%pre
+%patch0 -p1 -b .ruby
 
 %build
 %configure2_5x \
@@ -120,7 +137,6 @@ rm -rf %{buildroot}
 %_libdir/lib*.so
 %_libdir/lib*a
 
-
 %files -n caca-utils
 %defattr(-,root,root)
 %doc README THANKS AUTHORS
@@ -129,13 +145,22 @@ rm -rf %{buildroot}
 %{_bindir}/cacaplay
 %{_bindir}/cacaserver
 %{_bindir}/cacaview
-%_bindir/img2irc
+%_bindir/img2txt
 %{_datadir}/libcaca/
 %{_mandir}/man1/cacademo.1*
 %{_mandir}/man1/cacafire.1*
 %{_mandir}/man1/cacaplay.1*
 %{_mandir}/man1/cacaserver.1*
 %{_mandir}/man1/cacaview.1*
-%_mandir/man1/img2irc.1*
+%_mandir/man1/img2txt.1*
 
+%files -n caca-sharp
+%{_libdir}/caca-sharp/caca-sharp.dll
+%{_libdir}/caca-sharp/caca-sharp.dll.config
+%{_libdir}/cucul-sharp/cucul-sharp.dll
+%{_libdir}/cucul-sharp/cucul-sharp.dll.config
 
+%files -n ruby-caca
+%{ruby_sitelibdir}/caca.rb
+%{ruby_sitearchdir}/*.so
+%exclude %{ruby_sitearchdir}/*a
