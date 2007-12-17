@@ -16,7 +16,6 @@ Source: http://libcaca.zoy.org/files/%{name}-%{version}.%pre.tar.gz
 Patch0:	libcaca-0.99.beta13-ruby.patch
 License: WTFPL
 Group: System/Libraries
-BuildRoot: %{_tmppath}/%{name}-buildroot
 Buildrequires: X11-devel, libncursesw-devel >= 5
 %if %build_slang
 Buildrequires: slang-devel
