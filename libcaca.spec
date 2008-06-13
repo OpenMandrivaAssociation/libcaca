@@ -1,6 +1,6 @@
 %define name libcaca
 %define version 0.99
-%define pre beta13
+%define pre beta13b
 %define release %mkrel 0.%pre.1
 %define build_slang 1
 
@@ -13,7 +13,7 @@ Version: %{version}
 Release: %{release}
 URL: http://libcaca.zoy.org/
 Source: http://libcaca.zoy.org/files/%{name}-%{version}.%pre.tar.gz
-Patch0:	libcaca-0.99.beta13-ruby.patch
+Patch: libcaca-0.99.beta13b-gcc4.3.patch
 License: WTFPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -96,7 +96,7 @@ Ruby binding for libcaca
 
 %prep
 %setup -q -n %name-%version.%pre
-%patch0 -p1 -b .ruby
+%patch -p1
 
 %build
 %configure2_5x \
