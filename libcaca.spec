@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
 %define pre beta13b
-%define release %mkrel 0.%pre.1
+%define release %mkrel 0.beta13.2
 %define build_slang 1
 
 %define major 0
