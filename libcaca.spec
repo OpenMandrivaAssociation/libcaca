@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
-%define pre beta13b
-%define release %mkrel 0.beta13.2
+%define pre beta14
+%define release %mkrel 0.%pre.1
 %define build_slang 1
 
 %define major 0
@@ -12,8 +12,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 URL: http://libcaca.zoy.org/
-Source: http://libcaca.zoy.org/files/%{name}-%{version}.%pre.tar.gz
-Patch: libcaca-0.99.beta13b-gcc4.3.patch
+Source: http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}.%pre.tar.gz
 License: WTFPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -96,7 +95,6 @@ Ruby binding for libcaca
 
 %prep
 %setup -q -n %name-%version.%pre
-%patch -p1
 
 %build
 %configure2_5x \
@@ -106,7 +104,9 @@ Ruby binding for libcaca
   --disable-slang \
 %endif
 --enable-ncurses --enable-x11 --enable-imlib2 --enable-doc
-%make 
+
+sed -i -e 's/-Wl,--no-undefined//' ruby/Makefile
+%make
 
 %install
 rm -rf %{buildroot} installed-docs
@@ -131,7 +131,7 @@ rm -rf %{buildroot}
 
 %files -n %develname
 %defattr(-,root,root)
-%doc installed-docs/pdf/* installed-docs/html NEWS NOTES TODO
+%doc installed-docs/pdf/* installed-docs/html NEWS NOTES
 %{_bindir}/caca-config
 %_bindir/*/caca-config
 %{_includedir}/*
