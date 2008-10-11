@@ -1,6 +1,6 @@
 %define name libcaca
 %define version 0.99
-%define pre beta14
+%define pre beta15
 %define release %mkrel 0.%pre.1
 %define build_slang 1
 
@@ -112,8 +112,9 @@ sed -i -e 's/-Wl,--no-undefined//' ruby/Makefile
 rm -rf %{buildroot} installed-docs
 %makeinstall_std
 %multiarch_binaries %buildroot%_bindir/caca-config
-mv %{buildroot}%{_datadir}/doc/libcucul-dev installed-docs
+mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 mkdir %{buildroot}%{_datadir}/doc/caca-utils-%{version}
+rm %buildroot%{_datadir}/doc/libcucul-dev
 
 %clean
 rm -rf %{buildroot}
@@ -161,8 +162,6 @@ rm -rf %{buildroot}
 %files -n caca-sharp
 %{_libdir}/caca-sharp/caca-sharp.dll
 %{_libdir}/caca-sharp/caca-sharp.dll.config
-%{_libdir}/cucul-sharp/cucul-sharp.dll
-%{_libdir}/cucul-sharp/cucul-sharp.dll.config
 
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
