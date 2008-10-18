@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
-%define pre beta15
-%define release %mkrel 0.%pre.3
+%define pre beta16
+%define release %mkrel 0.%pre.1
 %define build_slang 1
 
 %define major 0
@@ -13,7 +13,6 @@ Version: %{version}
 Release: %{release}
 URL: http://libcaca.zoy.org/
 Source: http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}.%pre.tar.gz
-Patch: libcaca-0.99.beta15-fix-pkgconfig-file.patch
 License: WTFPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
@@ -96,7 +95,6 @@ Ruby binding for libcaca
 
 %prep
 %setup -q -n %name-%version.%pre
-%patch -p1
 
 %build
 %configure2_5x \
@@ -107,7 +105,6 @@ Ruby binding for libcaca
 %endif
 --enable-ncurses --enable-x11 --enable-imlib2 --enable-doc
 
-sed -i -e 's/-Wl,--no-undefined//' ruby/Makefile
 %make
 
 %install
