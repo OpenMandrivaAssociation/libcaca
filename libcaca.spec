@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
 %define pre beta16
-%define release %mkrel 0.%pre.2
+%define release %mkrel 0.%pre.3
 %define build_slang 1
 
 %define major 0
@@ -103,7 +103,7 @@ Ruby binding for libcaca
 %else
   --disable-slang \
 %endif
---enable-ncurses --enable-x11 --enable-imlib2 --enable-doc
+--enable-ncurses --enable-x11 --enable-imlib2 --enable-doc --enable-plugins
 
 %make
 
@@ -128,6 +128,8 @@ rm -rf %{buildroot}
 %files -n %libname
 %defattr(-,root,root)
 %_libdir/lib*.so.%{major}*
+# FIXME split them into subpackage, to avoid dependency on X
+%_libdir/caca/lib*.so.%{major}*
 
 %files -n %develname
 %defattr(-,root,root)
@@ -140,6 +142,8 @@ rm -rf %{buildroot}
 %_libdir/pkgconfig/*.pc
 %_libdir/lib*.so
 %_libdir/lib*a
+%_libdir/caca/lib*.so
+%_libdir/caca/lib*a
 
 %files -n caca-utils
 %defattr(-,root,root)
