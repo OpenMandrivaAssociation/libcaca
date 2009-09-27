@@ -25,7 +25,10 @@ Buildrequires: libpango-devel
 Buildrequires: libmesaglut-devel
 Buildrequires: doxygen, tetex-latex, tetex-dvips
 Buildrequires: automake1.7
-Buildrequires: ruby-devel mono
+Buildrequires: ruby-devel
+%ifnarch %mips
+BuildRequires: mono
+%endif
 
 Summary: Text mode graphics library
 %description
@@ -79,12 +82,14 @@ an old school plasma effect.
 cacademo is a simple application that shows the libcaca rendering features
 such as line and ellipses drawing, triangle filling and sprite blitting.
 
+%ifnarch %mips
 %package -n caca-sharp
 Summary: C# binding for libcaca
 Group: Development/Other
 
 %description -n caca-sharp
 C# binding for libcaca
+%endif
 
 %package -n ruby-caca
 Summary: Ruby binding for libcaca
@@ -162,9 +167,11 @@ rm -rf %{buildroot}
 %{_mandir}/man1/cacaview.1*
 %_mandir/man1/img2txt.1*
 
+%ifnarch %mips
 %files -n caca-sharp
 %{_libdir}/caca-sharp/caca-sharp.dll
 %{_libdir}/caca-sharp/caca-sharp.dll.config
+%endif
 
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
