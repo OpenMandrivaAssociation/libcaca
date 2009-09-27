@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
 %define pre beta16
-%define release %mkrel 0.%pre.4
+%define release %mkrel 0.%pre.5
 %define build_slang 1
 
 %define major 0
@@ -102,6 +102,9 @@ Ruby binding for libcaca
 %setup -q -n %name-%version.%pre
 
 %build
+# blame pascal for that :P
+automake -a -c -f || /bin/true;
+autoreconf -fi
 %configure2_5x \
 %if %build_slang
   --enable-slang \
