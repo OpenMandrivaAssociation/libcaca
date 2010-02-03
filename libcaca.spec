@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
 %define pre beta16
-%define release %mkrel 0.%pre.5
+%define release %mkrel -c %pre 5
 %define build_slang 1
 
 %define major 0
@@ -50,7 +50,6 @@ drawing, as well as powerful image to text conversion routines.
 Summary: Development files for libcaca
 Group: Development/C
 Provides: %{name}-devel = %{version}-%{release}
-Provides: lib%{name}-devel = %{version}-%{release}
 Requires: %libname = %version
 Obsoletes: %mklibname -d caca 0
 
