@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
-%define pre beta16
-%define release %mkrel -c %pre 5
+%define pre beta17
+%define release %mkrel -c %pre 1
 %define build_slang 1
 
 %define major 0
@@ -24,7 +24,6 @@ Buildrequires: imlib2-devel
 Buildrequires: libpango-devel
 Buildrequires: libmesaglut-devel
 Buildrequires: doxygen, tetex-latex, tetex-dvips
-Buildrequires: automake1.7
 Buildrequires: ruby-devel
 %ifnarch %mips %arm
 BuildRequires: mono
@@ -101,9 +100,6 @@ Ruby binding for libcaca
 %setup -q -n %name-%version.%pre
 
 %build
-# blame pascal for that :P
-automake -a -c -f || /bin/true;
-autoreconf -fi
 %configure2_5x \
 %if %build_slang
   --enable-slang \
@@ -171,8 +167,8 @@ rm -rf %{buildroot}
 
 %ifnarch %mips %arm
 %files -n caca-sharp
-%{_libdir}/caca-sharp/caca-sharp.dll
-%{_libdir}/caca-sharp/caca-sharp.dll.config
+%{_libdir}/mono/caca-sharp*
+%{_libdir}/mono/gac/caca-sharp
 %endif
 
 %files -n ruby-caca
