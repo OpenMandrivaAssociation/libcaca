@@ -113,6 +113,9 @@ Ruby binding for libcaca
 %install
 rm -rf %{buildroot} installed-docs
 %makeinstall_std
+
+rm -f %{buildroot}%{ruby_sitearchdir}/*.la
+
 %multiarch_binaries %buildroot%_bindir/caca-config
 mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 mkdir %{buildroot}%{_datadir}/doc/caca-utils-%{version}
@@ -174,4 +177,3 @@ rm -rf %{buildroot}
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
 %{ruby_sitearchdir}/*.so
-%exclude %{ruby_sitearchdir}/*a
