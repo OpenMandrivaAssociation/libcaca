@@ -16,7 +16,7 @@ Source: http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}.%pre.t
 License: WTFPL
 Group: System/Libraries
 BuildRoot: %{_tmppath}/%{name}-buildroot
-Buildrequires: X11-devel, libncursesw-devel >= 5
+Buildrequires: libx11-devel, libncursesw-devel >= 5
 %if %build_slang
 Buildrequires: slang-devel
 %endif
