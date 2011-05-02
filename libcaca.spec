@@ -1,7 +1,7 @@
 %define name libcaca
 %define version 0.99
 %define pre beta17
-%define release %mkrel -c %pre 2
+%define release %mkrel -c %pre 3
 %define build_slang 1
 
 %define major 0
@@ -141,7 +141,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc installed-docs/pdf/* installed-docs/html NEWS NOTES
 %{_bindir}/caca-config
-%_bindir/*/caca-config
+%{multiarch_bindir}/caca-config
 %{_includedir}/*
 %{_mandir}/man1/caca-config.1*
 %{_mandir}/man3/*
