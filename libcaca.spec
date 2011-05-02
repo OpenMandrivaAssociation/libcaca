@@ -117,6 +117,7 @@ rm -rf %{buildroot} installed-docs
 rm -f %{buildroot}%{ruby_sitearchdir}/*.la
 
 %multiarch_binaries %buildroot%_bindir/caca-config
+
 mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 mkdir %{buildroot}%{_datadir}/doc/caca-utils-%{version}
 rm %buildroot%{_datadir}/doc/libcucul-dev
