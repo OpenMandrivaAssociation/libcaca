@@ -2,28 +2,32 @@
 %define major 0
 %define libname %mklibname caca %{major}
 %define libnamexx %mklibname caca++ %{major}
-%define libcucul %mklibname cucul %{major}
-%define libcuculxx %mklibname cucul++ %{major}
+%define libgl_plugin %mklibname libgl_plugin %{major}
+%define libx11_plugin %mklibname libx11_plugin %{major}
 %define develname %mklibname -d caca
 
+%define build_dox 0
 %define build_slang 1
 
 Name: libcaca
 Version: 0.99
 Release: 0.%{prerel}.4
-License: WTFPL
+License: GPLv2
 Group: System/Libraries
 URL: http://libcaca.zoy.org/
-Source0: http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}.%pre.tar.gz
+Source0: http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}.%{prerel}.tar.gz
 
-Buildrequires: libx11-devel, libncursesw-devel >= 5
-%if %build_slang
-Buildrequires: slang-devel
+%if %{build_slang}
+Buildrequires: pkgconfig(slang)
 %endif
-Buildrequires: imlib2-devel
-Buildrequires: libpango-devel
-Buildrequires: libmesaglut-devel
+Buildrequires: pkgconfig(glut)
+Buildrequires: pkgconfig(imlib2)
+Buildrequires: pkgconfig(ncursesw)
+Buildrequires: pkgconfig(pangoft2)
+Buildrequires: pkgconfig(x11)
+%if %{build_dox}
 Buildrequires: doxygen, tetex-latex, tetex-dvips
+%endif
 Buildrequires: ruby-devel
 %ifnarch %mips %arm
 BuildRequires: mono
@@ -54,21 +58,21 @@ Conflicts: %{libname} < 0.99-0.%{prerel}.4
 %description -n %{libnamexx}
 This package contains the shared library for %{name}++.
 
-%package -n %{libcucul}
+%package -n %{libgl_plugin}
 Summary: Text mode graphics library
 Group: System/Libraries
 Conflicts: %{libname} < 0.99-0.%{prerel}.4
 
-%description -n %{libcucul}
-This package contains the shared library libcucul.
+%description -n %{libgl_plugin}
+This package contains the shared library libgl_plugin.
 
-%package -n %{libcuculxx}
+%package -n %{libx11_plugin}
 Summary: Text mode graphics library
 Group: System/Libraries
 Conflicts: %{libname} < 0.99-0.%{prerel}.4
 
-%description -n %{libcuculxx}
-This package contains the shared library libcucul++.
+%description -n %{libx11_plugin}
+This package contains the shared library libgl_plugin.
 
 %package -n %{develname}
 Summary: Development files for libcaca
@@ -76,8 +80,8 @@ Group: Development/C
 Provides: %{name}-devel = %{version}-%{release}
 Requires: %{libname} = %{version}-%{release}
 Requires: %{libnamexx} = %{version}-%{release}
-Requires: %{libcucul} = %{version}-%{release}
-Requires: %{libcuculxx} = %{version}-%{release}
+Requires: %{libgl_plugin} = %{version}-%{release}
+Requires: %{libx11_plugin} = %{version}-%{release}
 Obsoletes: %mklibname -d caca 0
 
 %description -n %{develname}
@@ -112,7 +116,7 @@ such as line and ellipses drawing, triangle filling and sprite blitting.
 
 %ifnarch %mips %arm
 %package -n caca-sharp
-Summary: C# binding for libcaca
+Summary: Mono binding for libcaca
 Group: Development/Other
 
 %description -n caca-sharp
@@ -127,18 +131,18 @@ Group: Development/Ruby
 Ruby binding for libcaca
 
 %prep
-%setup -qn %{name}-%{version}.%prerel
+%setup -qn %{name}-%{version}.%{prerel}
 
 %build
 %configure2_5x \
 	--disable-static \
-%if %build_slang
+%if %{build_slang}
 	--enable-slang \
 %else
 	--disable-slang \
 %endif
 	--enable-ncurses \
-	--enable-x11 
+	--enable-x11 \
 	--enable-imlib2 \
 	--enable-doc \
 	--enable-plugins
@@ -148,37 +152,45 @@ Ruby binding for libcaca
 %install
 rm -rf %{buildroot} installed-docs
 %makeinstall_std
-
-rm -f %{buildroot}%{ruby_sitearchdir}/*.la
+find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
+# maybe b/c they are symlinks
+rm -f %{buildroot}%{_libdir}/libcucul*.la
 
 %multiarch_binaries %{buildroot}%{_bindir}/caca-config
 
+%if %{build_dox}
 mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 mkdir %{buildroot}%{_datadir}/doc/caca-utils-%{version}
 rm %{buildroot}%{_datadir}/doc/libcucul-dev
+%endif
 
 %files -n %{libname}
 %{_libdir}/libcaca.so.%{major}*
+%{_libdir}/libcucul.so.%{major}*
 
 %files -n %{libnamexx}
 %{_libdir}/libcaca++.so.%{major}*
-
-%files -n %{libcucul}
-%{_libdir}/libcucul.so.%{major}*
-
-%files -n %{libcuculxx}
 %{_libdir}/libcucul++.so.%{major}*
 
+%files -n %{libgl_plugin}
+%{_libdir}/caca/libgl_plugin.so.%{major}*
+
+%files -n %{libx11_plugin}
+%{_libdir}/caca/libx11_plugin.so.%{major}*
+
 %files -n %{develname}
-%doc installed-docs/pdf/* installed-docs/html NEWS NOTES
+%doc NEWS NOTES
 %{_bindir}/caca-config
 %{multiarch_bindir}/caca-config
 %{_includedir}/*
-%{_mandir}/man1/caca-config.1*
-%{_mandir}/man3/*
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 %{_libdir}/caca/lib*.so
+%{_mandir}/man1/caca-config.1*
+%if %{build_dox}
+%{_mandir}/man3/*
+%doc installed-docs/pdf/* installed-docs/html 
+%endif
 
 %files -n caca-utils
 %doc README THANKS AUTHORS
@@ -188,7 +200,6 @@ rm %{buildroot}%{_datadir}/doc/libcucul-dev
 %{_bindir}/cacaserver
 %{_bindir}/cacaview
 %{_bindir}/img2txt
-%{_libdir}/caca/lib*.so.%{major}*
 %{_datadir}/libcaca/
 %{_mandir}/man1/cacademo.1*
 %{_mandir}/man1/cacafire.1*
