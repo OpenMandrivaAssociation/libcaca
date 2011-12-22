@@ -1,21 +1,21 @@
-%define name libcaca
-%define version 0.99
-%define pre beta17
-%define release %mkrel -c %pre 3
-%define build_slang 1
-
+%define prerel beta17
 %define major 0
-%define libname %mklibname caca %major
+%define libname %mklibname caca %{major}
+%define libnamexx %mklibname caca++ %{major}
+%define libcucul %mklibname cucul %{major}
+%define libcuculxx %mklibname cucul++ %{major}
 %define develname %mklibname -d caca
 
-Name: %{name}
-Version: %{version}
-Release: %{release}
-URL: http://libcaca.zoy.org/
-Source: http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}.%pre.tar.gz
+%define build_slang 1
+
+Name: libcaca
+Version: 0.99
+Release: 0.%{prerel}.4
 License: WTFPL
 Group: System/Libraries
-BuildRoot: %{_tmppath}/%{name}-buildroot
+URL: http://libcaca.zoy.org/
+Source0: http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}.%pre.tar.gz
+
 Buildrequires: libx11-devel, libncursesw-devel >= 5
 %if %build_slang
 Buildrequires: slang-devel
@@ -35,24 +35,52 @@ libcaca is the Colour AsCii Art library. It provides high level functions
 for colour text drawing, simple primitives for line, polygon and ellipse
 drawing, as well as powerful image to text conversion routines.
 
-%package -n %libname
+%package -n %{libname}
 Summary: Text mode graphics library
 Group: System/Libraries
 
-%description -n %libname
+%description -n %{libname}
 libcaca is the Colour AsCii Art library. It provides high level functions
 for colour text drawing, simple primitives for line, polygon and ellipse
 drawing, as well as powerful image to text conversion routines.
 
+This package contains the shared library for %{name}.
 
-%package -n %develname
+%package -n %{libnamexx}
+Summary: Text mode graphics library
+Group: System/Libraries
+Conflicts: %{libname} < 0.99-0.%{prerel}.4
+
+%description -n %{libnamexx}
+This package contains the shared library for %{name}++.
+
+%package -n %{libcucul}
+Summary: Text mode graphics library
+Group: System/Libraries
+Conflicts: %{libname} < 0.99-0.%{prerel}.4
+
+%description -n %{libcucul}
+This package contains the shared library libcucul.
+
+%package -n %{libcuculxx}
+Summary: Text mode graphics library
+Group: System/Libraries
+Conflicts: %{libname} < 0.99-0.%{prerel}.4
+
+%description -n %{libcuculxx}
+This package contains the shared library libcucul++.
+
+%package -n %{develname}
 Summary: Development files for libcaca
 Group: Development/C
 Provides: %{name}-devel = %{version}-%{release}
-Requires: %libname = %version
+Requires: %{libname} = %{version}-%{release}
+Requires: %{libnamexx} = %{version}-%{release}
+Requires: %{libcucul} = %{version}-%{release}
+Requires: %{libcuculxx} = %{version}-%{release}
 Obsoletes: %mklibname -d caca 0
 
-%description -n %develname
+%description -n %{develname}
 libcaca is the Colour AsCii Art library. It provides high level functions
 for colour text drawing, simple primitives for line, polygon and ellipse
 drawing, as well as powerful image to text conversion routines.
@@ -63,6 +91,8 @@ compile applications or shared objects that use libcaca.
 %package -n caca-utils
 Summary: Text mode graphics utilities
 Group: Graphics
+Conflicts: %{libname} < 0.99-0.%{prerel}.4
+
 %description -n caca-utils
 This package contains utilities and demonstration programs for libcaca, the
 Colour AsCii Art library.
@@ -86,7 +116,7 @@ Summary: C# binding for libcaca
 Group: Development/Other
 
 %description -n caca-sharp
-C# binding for libcaca
+Mono binding for libcaca
 %endif
 
 %package -n ruby-caca
@@ -97,16 +127,21 @@ Group: Development/Ruby
 Ruby binding for libcaca
 
 %prep
-%setup -q -n %name-%version.%pre
+%setup -qn %{name}-%{version}.%prerel
 
 %build
 %configure2_5x \
+	--disable-static \
 %if %build_slang
-  --enable-slang \
+	--enable-slang \
 %else
-  --disable-slang \
+	--disable-slang \
 %endif
---enable-ncurses --enable-x11 --enable-imlib2 --enable-doc --enable-plugins
+	--enable-ncurses \
+	--enable-x11 
+	--enable-imlib2 \
+	--enable-doc \
+	--enable-plugins
 
 %make
 
@@ -116,58 +151,51 @@ rm -rf %{buildroot} installed-docs
 
 rm -f %{buildroot}%{ruby_sitearchdir}/*.la
 
-%multiarch_binaries %buildroot%_bindir/caca-config
+%multiarch_binaries %{buildroot}%{_bindir}/caca-config
 
 mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 mkdir %{buildroot}%{_datadir}/doc/caca-utils-%{version}
-rm %buildroot%{_datadir}/doc/libcucul-dev
+rm %{buildroot}%{_datadir}/doc/libcucul-dev
 
-%clean
-rm -rf %{buildroot}
+%files -n %{libname}
+%{_libdir}/libcaca.so.%{major}*
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
-%endif
+%files -n %{libnamexx}
+%{_libdir}/libcaca++.so.%{major}*
 
-%files -n %libname
-%defattr(-,root,root)
-%_libdir/lib*.so.%{major}*
-# FIXME split them into subpackage, to avoid dependency on X
-%_libdir/caca/lib*.so.%{major}*
+%files -n %{libcucul}
+%{_libdir}/libcucul.so.%{major}*
 
-%files -n %develname
-%defattr(-,root,root)
+%files -n %{libcuculxx}
+%{_libdir}/libcucul++.so.%{major}*
+
+%files -n %{develname}
 %doc installed-docs/pdf/* installed-docs/html NEWS NOTES
 %{_bindir}/caca-config
 %{multiarch_bindir}/caca-config
 %{_includedir}/*
 %{_mandir}/man1/caca-config.1*
 %{_mandir}/man3/*
-%_libdir/pkgconfig/*.pc
-%_libdir/lib*.so
-%_libdir/lib*a
-%_libdir/caca/lib*.so
-%_libdir/caca/lib*a
+%{_libdir}/pkgconfig/*.pc
+%{_libdir}/lib*.so
+%{_libdir}/caca/lib*.so
 
 %files -n caca-utils
-%defattr(-,root,root)
 %doc README THANKS AUTHORS
 %{_bindir}/cacademo
 %{_bindir}/cacafire
 %{_bindir}/cacaplay
 %{_bindir}/cacaserver
 %{_bindir}/cacaview
-%_bindir/img2txt
+%{_bindir}/img2txt
+%{_libdir}/caca/lib*.so.%{major}*
 %{_datadir}/libcaca/
 %{_mandir}/man1/cacademo.1*
 %{_mandir}/man1/cacafire.1*
 %{_mandir}/man1/cacaplay.1*
 %{_mandir}/man1/cacaserver.1*
 %{_mandir}/man1/cacaview.1*
-%_mandir/man1/img2txt.1*
+%{_mandir}/man1/img2txt.1*
 
 %ifnarch %mips %arm
 %files -n caca-sharp
@@ -178,3 +206,4 @@ rm -rf %{buildroot}
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
 %{ruby_sitearchdir}/*.so
+
