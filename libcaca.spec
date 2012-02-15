@@ -11,7 +11,7 @@
 
 Name: libcaca
 Version: 0.99
-Release: 0.%{prerel}.4
+Release: 0.%{prerel}.5
 License: GPLv2
 Group: System/Libraries
 URL: http://libcaca.zoy.org/
