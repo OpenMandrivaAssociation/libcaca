@@ -134,6 +134,7 @@ Ruby binding for libcaca
 %prep
 %setup -qn %{name}-%{version}.%{prerel}
 %patch0 -p1 -b .ruby19~
+autoreconf -fi
 
 %build
 %configure2_5x \
