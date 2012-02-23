@@ -11,7 +11,7 @@
 
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}5
+Release:	%{?prerel:0.%{prerel}.}6
 Summary:	Text mode graphics library
 License:	GPLv2
 Group:		System/Libraries
