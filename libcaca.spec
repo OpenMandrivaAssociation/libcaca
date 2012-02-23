@@ -148,7 +148,8 @@ autoreconf -fi
 	--enable-x11 \
 	--enable-imlib2 \
 	--enable-doc \
-	--enable-plugins
+	--enable-plugins \
+	--disable-java
 
 %make
 
