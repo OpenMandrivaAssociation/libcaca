@@ -54,7 +54,7 @@ This package contains the shared library for %{name}.
 %package -n	%{libnamexx}
 Summary:	Text mode graphics library
 Group:		System/Libraries
-Conflicts:	%{libname} < 0.99-0.%{prerel}.4
+Conflicts:	%{libname} < 0.99-0.beta17.4
 
 %description -n	%{libnamexx}
 This package contains the shared library for %{name}++.
@@ -62,7 +62,7 @@ This package contains the shared library for %{name}++.
 %package -n	%{libgl_plugin}
 Summary:	Text mode graphics library
 Group:		System/Libraries
-Conflicts:	%{libname} < 0.99-0.%{prerel}.4
+Conflicts:	%{libname} < 0.99-0.beta17.4
 
 %description -n	%{libgl_plugin}
 This package contains the shared library libgl_plugin.
@@ -70,7 +70,7 @@ This package contains the shared library libgl_plugin.
 %package -n	%{libx11_plugin}
 Summary:	Text mode graphics library
 Group:		System/Libraries
-Conflicts:	%{libname} < 0.99-0.%{prerel}.4
+Conflicts:	%{libname} < 0.99-0.beta17.4
 
 %description -n	%{libx11_plugin}
 This package contains the shared library libgl_plugin.
@@ -96,7 +96,7 @@ compile applications or shared objects that use libcaca.
 %package -n	caca-utils
 Summary:	Text mode graphics utilities
 Group:		Graphics
-Conflicts:	%{libname} < 0.99-0.%{prerel}.4
+Conflicts:	%{libname} < 0.99-0.beta17.4
 
 %description -n	caca-utils
 This package contains utilities and demonstration programs for libcaca, the
