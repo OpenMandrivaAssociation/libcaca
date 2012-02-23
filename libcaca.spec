@@ -158,7 +158,6 @@ autoreconf -fi
 %make
 
 %install
-rm -rf %{buildroot} installed-docs
 %makeinstall_std
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 # maybe b/c they are symlinks
@@ -167,6 +166,7 @@ rm -f %{buildroot}%{_libdir}/libcucul*.la
 %multiarch_binaries %{buildroot}%{_bindir}/caca-config
 
 %if %{with dox}
+rm -rf installed-docs
 mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 mkdir %{buildroot}%{_datadir}/doc/caca-utils-%{version}
 rm %{buildroot}%{_datadir}/doc/libcucul-dev
