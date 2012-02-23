@@ -168,7 +168,6 @@ rm -f %{buildroot}%{_libdir}/libcucul*.la
 %if %{with dox}
 rm -rf installed-docs
 mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
-mkdir %{buildroot}%{_datadir}/doc/caca-utils-%{version}
 rm %{buildroot}%{_datadir}/doc/libcucul-dev
 %endif
 
