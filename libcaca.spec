@@ -28,7 +28,7 @@ Buildrequires:	pkgconfig(ncursesw)
 Buildrequires:	pkgconfig(pangoft2)
 Buildrequires:	pkgconfig(x11)
 %if %{with dox}
-Buildrequires:	doxygen tetex-latex tetex-dvips
+Buildrequires:	doxygen texlive
 %endif
 Buildrequires:	ruby-devel
 %ifnarch %{mipsx} %{arm}
