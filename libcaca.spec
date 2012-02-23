@@ -6,7 +6,7 @@
 %define	libx11_plugin %mklibname libx11_plugin %{major}
 %define	devname %mklibname -d caca
 
-%bcond_with	dox
+%bcond_without	dox
 %bcond_without	slang
 
 Name:		libcaca
@@ -147,7 +147,11 @@ autoreconf -fi
 	--enable-ncurses \
 	--enable-x11 \
 	--enable-imlib2 \
+%if %{with dox}
 	--enable-doc \
+%else
+	--disable-doc \
+%endif
 	--enable-plugins \
 	--disable-java
 
