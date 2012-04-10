@@ -131,6 +131,13 @@ Group:		Development/Ruby
 %description -n	ruby-caca
 Ruby binding for libcaca
 
+%package -n python-caca
+Summary:	Python binding for libcaca
+Group:		Development/Python
+
+%description -n	python-caca
+Python binding for libcaca
+
 %prep
 %setup -qn %{name}-%{version}%{?prerel:.%{prerel}}
 %patch0 -p1 -b .ruby19~
@@ -201,6 +208,7 @@ rm %{buildroot}%{_datadir}/doc/libcucul-dev
 
 %files -n caca-utils
 %doc README THANKS AUTHORS
+%{_bindir}/cacaclock
 %{_bindir}/cacademo
 %{_bindir}/cacafire
 %{_bindir}/cacaplay
@@ -224,3 +232,6 @@ rm %{buildroot}%{_datadir}/doc/libcucul-dev
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
 %{ruby_sitearchdir}/*.so
+
+%files -n python-caca
+%py_puresitedir/caca
