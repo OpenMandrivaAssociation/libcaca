@@ -1,4 +1,4 @@
-%define	prerel	beta17
+%define	prerel	beta18
 %define	major	0
 %define	libname	%mklibname caca %{major}
 %define	libnamexx %mklibname caca++ %{major}
@@ -11,7 +11,7 @@
 
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}6
+Release:	%{?prerel:0.%{prerel}.}1
 Summary:	Text mode graphics library
 License:	GPLv2
 Group:		System/Libraries
