@@ -17,7 +17,7 @@ License:	GPLv2
 Group:		System/Libraries
 URL:		http://libcaca.zoy.org/
 Source0:	http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}%{?prerel:.%{prerel}}.tar.gz
-Patch0:		libcaca-0.99.beta17-ruby1.9.patch
+Patch0:		libcaca-0.99.beta18-ruby1.9.patch
 
 %if %{with slang}
 Buildrequires:	pkgconfig(slang)
