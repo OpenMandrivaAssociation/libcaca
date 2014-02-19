@@ -1,18 +1,18 @@
-%define	prerel	beta18
-%define	major	0
-%define	libname	%mklibname caca %{major}
-%define	libnamexx %mklibname caca++ %{major}
-%define	libgl_plugin %mklibname libgl_plugin %{major}
-%define	libx11_plugin %mklibname libx11_plugin %{major}
-%define	devname %mklibname -d caca
+%define prerel beta18
+%define major 0
+%define libname %mklibname caca %{major}
+%define libnamexx %mklibname caca++ %{major}
+%define libgl_plugin %mklibname libgl_plugin %{major}
+%define libx11_plugin %mklibname libx11_plugin %{major}
+%define devname %mklibname -d caca
 
-%bcond_without	dox
-%bcond_without	slang
+%bcond_without dox
+%bcond_without slang
 
 Summary:	Text mode graphics library
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}2
+Release:	%{?prerel:0.%{prerel}.}3
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://libcaca.zoy.org/
@@ -20,17 +20,17 @@ Source0:	http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}%{?pre
 Patch0:		libcaca-0.99.beta18-ruby1.9.patch
 
 %if %{with slang}
-Buildrequires:	pkgconfig(slang)
+BuildRequires:	pkgconfig(slang)
 %endif
-Buildrequires:	pkgconfig(glut)
-Buildrequires:	pkgconfig(imlib2)
-Buildrequires:	pkgconfig(ncursesw)
-Buildrequires:	pkgconfig(pangoft2)
-Buildrequires:	pkgconfig(x11)
+BuildRequires:	pkgconfig(glut)
+BuildRequires:	pkgconfig(imlib2)
+BuildRequires:	pkgconfig(ncursesw)
+BuildRequires:	pkgconfig(pangoft2)
+BuildRequires:	pkgconfig(x11)
 %if %{with dox}
-Buildrequires:	doxygen texlive
+BuildRequires:	doxygen texlive
 %endif
-Buildrequires:	ruby-devel
+BuildRequires:	ruby-devel
 %ifnarch %{mipsx} %{arm}
 BuildRequires:	mono
 %endif
