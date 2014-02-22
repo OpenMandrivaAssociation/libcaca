@@ -6,7 +6,7 @@
 %define libx11_plugin %mklibname libx11_plugin %{major}
 %define devname %mklibname -d caca
 
-%bcond_without dox
+%bcond_with dox
 %bcond_without slang
 
 Summary:	Text mode graphics library
