@@ -30,8 +30,8 @@ BuildRequires:	pkgconfig(x11)
 %if %{with dox}
 BuildRequires:	doxygen texlive
 %endif
-BuildRequires:	ruby-devel
-%ifnarch %{mipsx} %{arm}
+#BuildRequires:	ruby-devel
+%ifnarch %{mipsx} %{arm} aarch64
 BuildRequires:	mono
 %endif
 
