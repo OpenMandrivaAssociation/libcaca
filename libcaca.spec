@@ -1,4 +1,4 @@
-%define prerel beta18
+%define prerel beta19
 %define major 0
 %define libname %mklibname caca %{major}
 %define libnamexx %mklibname caca++ %{major}
@@ -12,12 +12,11 @@
 Summary:	Text mode graphics library
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}3
+Release:	%{?prerel:0.%{prerel}.}1
 License:	GPLv2
 Group:		System/Libraries
-Url:		http://libcaca.zoy.org/
-Source0:	http://libcaca.zoy.org/attachment/wiki/libcaca/%{name}-%{version}%{?prerel:.%{prerel}}.tar.gz
-Patch0:		libcaca-0.99.beta18-ruby1.9.patch
+Url:		http://caca.zoy.org/wiki/libcaca
+Source0:	http://caca.zoy.org/files/libcaca/%{name}-%{version}%{?prerel:.%{prerel}}.tar.gz
 
 %if %{with slang}
 BuildRequires:	pkgconfig(slang)
@@ -143,12 +142,12 @@ Python binding for libcaca
 %apply_patches
 
 #(tpg) fix build with automake-1.13
-sed -i s/AM_CONFIG_HEADER/AC_CONFIG_HEADER/ configure.ac
+#sed -i s/AM_CONFIG_HEADER/AC_CONFIG_HEADER/ configure.ac
 
 autoreconf -fi
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 %if %{with slang}
 	--enable-slang \
