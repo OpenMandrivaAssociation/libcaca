@@ -169,24 +169,19 @@ autoreconf -fi
 
 %install
 %makeinstall_std
-# maybe b/c they are symlinks
-rm -f %{buildroot}%{_libdir}/libcucul*.la
 
 %multiarch_binaries %{buildroot}%{_bindir}/caca-config
 
 %if %{with dox}
 rm -rf installed-docs
 mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
-rm %{buildroot}%{_datadir}/doc/libcucul-dev
 %endif
 
 %files -n %{libname}
 %{_libdir}/libcaca.so.%{major}*
-%{_libdir}/libcucul.so.%{major}*
 
 %files -n %{libnamexx}
 %{_libdir}/libcaca++.so.%{major}*
-%{_libdir}/libcucul++.so.%{major}*
 
 %files -n %{libgl_plugin}
 %{_libdir}/caca/libgl_plugin.so.%{major}*
@@ -231,9 +226,11 @@ rm %{buildroot}%{_datadir}/doc/libcucul-dev
 %{_libdir}/mono/gac/caca-sharp
 %endif
 
+%if 0
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
 %{ruby_sitearchdir}/*.so
+%endif
 
 %files -n python-caca
 %{py_puresitedir}/caca
