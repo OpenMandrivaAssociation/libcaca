@@ -29,7 +29,6 @@ BuildRequires:	pkgconfig(x11)
 %if %{with dox}
 BuildRequires:	doxygen
 BuildRequires:	texlive
-BuildRequires:	texlive-latex-bin
 %endif
 BuildRequires:	ruby-devel
 %ifnarch %{mipsx} %{arm} aarch64
@@ -202,7 +201,7 @@ mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 %{_mandir}/man1/caca-config.1*
 %if %{with dox}
 %{_mandir}/man3/*
-%doc installed-docs/pdf/* installed-docs/html 
+%doc installed-docs/html
 %endif
 
 %files -n caca-utils
