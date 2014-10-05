@@ -12,7 +12,7 @@
 Summary:	Text mode graphics library
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}1
+Release:	%{?prerel:0.%{prerel}.}2
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://caca.zoy.org/wiki/libcaca
@@ -29,7 +29,7 @@ BuildRequires:	pkgconfig(x11)
 %if %{with dox}
 BuildRequires:	doxygen texlive
 %endif
-#BuildRequires:	ruby-devel
+BuildRequires:	ruby-devel
 %ifnarch %{mipsx} %{arm} aarch64
 BuildRequires:	mono
 %endif
@@ -226,11 +226,9 @@ mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 %{_libdir}/mono/gac/caca-sharp
 %endif
 
-%if 0
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
 %{ruby_sitearchdir}/*.so
-%endif
 
 %files -n python-caca
 %{py_puresitedir}/caca
