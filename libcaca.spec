@@ -27,7 +27,9 @@ BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	pkgconfig(pangoft2)
 BuildRequires:	pkgconfig(x11)
 %if %{with dox}
-BuildRequires:	doxygen texlive
+BuildRequires:	doxygen
+BuildRequires:	texlive
+BuildRequires:	texlive-latex-bin
 %endif
 BuildRequires:	ruby-devel
 %ifnarch %{mipsx} %{arm} aarch64
