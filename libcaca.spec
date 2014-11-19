@@ -149,7 +149,6 @@ autoreconf -fi
 
 %build
 %configure \
-	--disable-static \
 %if %{with slang}
 	--enable-slang \
 %else
