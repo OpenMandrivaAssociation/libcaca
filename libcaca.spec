@@ -157,7 +157,7 @@ autoreconf -fi
 	--enable-ncurses \
 	--enable-x11 \
 	--enable-imlib2 \
-	--enable-cxx
+	--enable-cxx \
 %if %{with dox}
 	--enable-doc \
 %else
