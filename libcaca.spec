@@ -12,7 +12,7 @@
 Summary:	Text mode graphics library
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}2
+Release:	%{?prerel:0.%{prerel}.}3
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://caca.zoy.org/wiki/libcaca
