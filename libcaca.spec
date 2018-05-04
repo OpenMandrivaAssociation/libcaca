@@ -6,13 +6,15 @@
 %define libx11_plugin %mklibname libx11_plugin %{major}
 %define devname %mklibname -d caca
 
-%bcond_without dox
+%bcond_with dox
+%bcond_with mono
+%bcond_with ruby
 %bcond_without slang
 
 Summary:	Text mode graphics library
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}4
+Release:	%{?prerel:0.%{prerel}.}5
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://caca.zoy.org/wiki/libcaca
@@ -30,9 +32,13 @@ BuildRequires:	pkgconfig(x11)
 BuildRequires:	doxygen
 BuildRequires:	texlive
 %endif
+%if %{with ruby}
 BuildRequires:	ruby-devel
+%endif
 %ifnarch %{mipsx} %{arm} aarch64
+%if %{with mono}
 BuildRequires:	mono
+%endif
 %endif
 
 %description
@@ -124,12 +130,14 @@ Group:		Development/Other
 Mono binding for libcaca
 %endif
 
+%if %{with ruby}
 %package -n	ruby-caca
 Summary:	Ruby binding for libcaca
 Group:		Development/Ruby
 
 %description -n	ruby-caca
 Ruby binding for libcaca
+%endif
 
 %package -n python-caca
 Summary:	Python binding for libcaca
@@ -170,8 +178,6 @@ autoreconf -fi
 
 %install
 %makeinstall_std
-
-%multiarch_binaries %{buildroot}%{_bindir}/caca-config
 
 %if %{with dox}
 rm -rf installed-docs
@@ -222,15 +228,18 @@ mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 %{_mandir}/man1/img2txt.1*
 
 %ifnarch %{mips} %{arm}
+%if %{with mono}
 %files -n caca-sharp
 %{_libdir}/mono/caca-sharp*
 %{_libdir}/mono/gac/caca-sharp
 %endif
+%endif
 
+%if %{with ruby}
 %files -n ruby-caca
 %{ruby_sitelibdir}/caca.rb
 %{ruby_sitearchdir}/*.so
+%endif
 
 %files -n python-caca
 %{py_puresitedir}/caca
-
