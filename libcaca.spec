@@ -199,7 +199,6 @@ mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 %files -n %{devname}
 %doc NEWS NOTES
 %{_bindir}/caca-config
-%{multiarch_bindir}/caca-config
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
