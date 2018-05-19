@@ -8,13 +8,13 @@
 
 %bcond_with dox
 %bcond_with mono
-%bcond_with ruby
+%bcond_without ruby
 %bcond_without slang
 
 Summary:	Text mode graphics library
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}5
+Release:	%{?prerel:0.%{prerel}.}6
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://caca.zoy.org/wiki/libcaca
@@ -236,8 +236,8 @@ mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 
 %if %{with ruby}
 %files -n ruby-caca
-%{ruby_sitelibdir}/caca.rb
-%{ruby_sitearchdir}/*.so
+%{_datadir}/ruby/site_ruby/*
+%{_libdir}/ruby/site_ruby/*.so
 %endif
 
 %files -n python-caca
