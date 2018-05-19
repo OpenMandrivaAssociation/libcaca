@@ -19,6 +19,7 @@ License:	GPLv2
 Group:		System/Libraries
 Url:		http://caca.zoy.org/wiki/libcaca
 Source0:	http://caca.zoy.org/files/libcaca/%{name}-%{version}%{?prerel:.%{prerel}}.tar.gz
+Patch0:		libcaca-0.99-arm.patch
 
 %if %{with slang}
 BuildRequires:	pkgconfig(slang)

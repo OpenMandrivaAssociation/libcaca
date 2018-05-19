@@ -1,0 +1,21 @@
+diff -up libcaca-0.99.beta19/caca/dither.c.0000~ libcaca-0.99.beta19/caca/dither.c
+--- libcaca-0.99.beta19/caca/dither.c.0000~	2012-12-28 17:45:12.000000000 +0000
++++ libcaca-0.99.beta19/caca/dither.c	2018-05-19 09:12:15.622809083 +0000
+@@ -1249,7 +1249,7 @@ static void mask2shift(uint32_t mask, in
+ /* Compute x^y without relying on the math library */
+ static float gammapow(float x, float y)
+ {
+-#ifdef HAVE_FLDLN2
++#if defined(HAVE_FLDLN2) && !defined(__arm__)
+     register double logx;
+     register long double v, e;
+ #else
+@@ -1260,7 +1260,7 @@ static float gammapow(float x, float y)
+     if(x == 0.0)
+         return y == 0.0 ? 1.0 : 0.0;
+ 
+-#ifdef HAVE_FLDLN2
++#if defined(HAVE_FLDLN2) && !defined(__arm__)
+     /* FIXME: this can be optimised by directly calling fyl2x for x and y */
+     asm volatile("fldln2; fxch; fyl2x"
+                  : "=t" (logx) : "0" (x) : "st(1)");
