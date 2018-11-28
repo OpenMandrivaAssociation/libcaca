@@ -237,8 +237,9 @@ mv %{buildroot}%{_datadir}/doc/libcaca-dev installed-docs
 
 %if %{with ruby}
 %files -n ruby-caca
-%{_datadir}/ruby/site_ruby/*
-%{_libdir}/ruby/site_ruby/*.so
+%{ruby_sitearchdir}/*.so
+%{ruby_sitelibdir}/*.rb
+
 %endif
 
 %files -n python-caca
