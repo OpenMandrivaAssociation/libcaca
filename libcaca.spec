@@ -149,7 +149,7 @@ Python binding for libcaca
 
 %prep
 %setup -qn %{name}-%{version}%{?prerel:.%{prerel}}
-%apply_patches
+%autopatch -p1
 
 #(tpg) fix build with automake-1.13
 #sed -i s/AM_CONFIG_HEADER/AC_CONFIG_HEADER/ configure.ac
