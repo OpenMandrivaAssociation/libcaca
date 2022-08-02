@@ -18,7 +18,7 @@ Release:	%{?prerel:0.%{prerel}.}1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://caca.zoy.org/wiki/libcaca
-Sources0:	https://github.com/cacalabs/libcaca/releases/download/v%{version}.%{prerel}/libcaca-%{version}.%{prerel}.tar.bz2
+Source0:	https://github.com/cacalabs/libcaca/releases/download/v%{version}.%{prerel}/libcaca-%{version}.%{prerel}.tar.bz2
 #Source0:	http://caca.zoy.org/files/libcaca/%{name}-%{version}%{?prerel:.%{prerel}}.tar.gz
 Patch0:		libcaca-0.99-arm.patch
 
