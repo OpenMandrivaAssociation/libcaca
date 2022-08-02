@@ -1,4 +1,4 @@
-%define prerel beta19
+%define prerel beta20
 %define major 0
 %define libname %mklibname caca %{major}
 %define libnamexx %mklibname caca++ %{major}
@@ -14,11 +14,12 @@
 Summary:	Text mode graphics library
 Name:		libcaca
 Version:	0.99
-Release:	%{?prerel:0.%{prerel}.}6
+Release:	%{?prerel:0.%{prerel}.}1
 License:	GPLv2
 Group:		System/Libraries
 Url:		http://caca.zoy.org/wiki/libcaca
-Source0:	http://caca.zoy.org/files/libcaca/%{name}-%{version}%{?prerel:.%{prerel}}.tar.gz
+Source0:	https://github.com/cacalabs/libcaca/releases/download/v%{version}.%{prerel}/libcaca-%{version}.%{prerel}.tar.bz2
+#Source0:	http://caca.zoy.org/files/libcaca/%{name}-%{version}%{?prerel:.%{prerel}}.tar.gz
 Patch0:		libcaca-0.99-arm.patch
 
 %if %{with slang}
