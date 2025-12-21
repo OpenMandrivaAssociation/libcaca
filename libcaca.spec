@@ -23,6 +23,11 @@ Source0:	https://github.com/cacalabs/libcaca/releases/download/v%{version}.%{pre
 Patch0:		libcaca-0.99-arm.patch
 
 %if %{with slang}
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(slang)
 %endif
 BuildRequires:	pkgconfig(glut)
