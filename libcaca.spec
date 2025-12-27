@@ -1,3 +1,5 @@
+%global optflags %{optflags} -Wno-incompatible-function-pointer-types
+
 %define prerel beta20
 %define major 0
 %define libname %mklibname caca %{major}
